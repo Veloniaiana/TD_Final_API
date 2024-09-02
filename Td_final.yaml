@@ -67,7 +67,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Team'
-
+  /player:
+    get:
+      responses:
+        200:
+          description: List of Players
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Player'
+      responses:
+        200:
+          description: List of created Players
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
 components:
   schemas:
     Competition:
@@ -91,7 +118,7 @@ components:
             properties:
               competition:
                 $ref: '#/components/schemas/Competition'
-        playeurs:
+        players:
           type: array
           items:
             type: object
@@ -106,3 +133,11 @@ components:
         slogan:
           type: string
     Player:
+      type: object
+      properties:
+        name:
+          type: string
+        number:
+          type: integer
+        strongFoot:
+          type: string
