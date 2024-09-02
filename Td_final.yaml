@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: TD Final - STD23071
+  version: '1.0.1'
+servers:
+  - url : https://localhost.std23071.com
+paths:
+  /competition:
+    get:
+      responses:
+        200:
+          description: List of Competitions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Competition'
+    post:
+      requestBody:
+        content:
+          applications/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  country:
+                    type: string
+        required: true
+      responses:
+        200:
+          description: List of created Competitions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Competition'
+  /team:
+    get:
+      responses:
+        200:
+          description: List of Team
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreationTeam'
+      responses:
+        200:
+          description: List of created teams
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+
+components:
+  schemas:
+    Competition:
+      type: object
+      properties:
+        name:
+          type: string
+        country:
+          type: string
+    Team:
+      type: object
+      properties:
+        name:
+          type: string
+        slogan:
+          type: string
+        competitions:
+          type: array
+          items:
+            type: object
+            properties:
+              competition:
+                $ref: '#/components/schemas/Competition'
+        playeurs:
+          type: array
+          items:
+            type: object
+            properties:
+              player:
+                $ref: '#/components/schemas/Player'
+    CreationTeam:
+      type: object
+      properties:
+        name:
+          type: string
+        slogan:
+          type: string
+    Player:
